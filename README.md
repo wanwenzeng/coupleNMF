@@ -43,4 +43,7 @@ python coupleNMF.py -k 3 -E RAd4/E.txt -PeakO RAd4/PeakO.txt -REO RAd4/REO.txt -
 * itertools
 * MACS
 
-For any questions about the algorithm, please contact <zduren@stanford.edu>.
+
+**For any questions about running the software, please contact <zengww14@mails.tsinghua.edu.cn>.**
+
+**For any questions about the algorithm, please contact <zduren@stanford.edu>.**
