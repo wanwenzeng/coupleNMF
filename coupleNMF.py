@@ -58,9 +58,8 @@ E_symbol = [line.strip() for line in args.E_symbol]
 A        = np.load("RE_TG/"+args.s+"/"+args.ref +"/A.npy")
 A_symbol = np.load("RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy")
 
-print A
-A = todense(A)
-print A
+print A.shape
+
 E_symbol = np.asarray(E_symbol)
 A_symbol = np.asarray(A_symbol)
 
