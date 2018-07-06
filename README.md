@@ -9,7 +9,7 @@ For preprocessing the scRNA-seq data, please following the standard processing p
 For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, REO and PeakO. 
 
 ## Running coupleNMF
-* coupleNMF receives 7 parameters:
+**coupleNMF receives 7 parameters:**
 
 * -k         the clustering numbers
 
