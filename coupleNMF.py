@@ -30,14 +30,16 @@ def npmax(array):
     j = arrayindex[i]
     return i, j
 
+
+
 parser = argparse.ArgumentParser(description='coupleNMF for joint clustering scRNA-seq and scATAC-seq.')
 parser.add_argument('-k', dest='k', type=int, default=2, help='the number of clusters')
 parser.add_argument('-E', type=argparse.FileType('r'), help='the location of singlecell expression E matrix')
 parser.add_argument('-PeakO',type=argparse.FileType('r'), help='the location of singlecell ATAC-seq PeakO matrix')
 parser.add_argument('-REO', type=argparse.FileType('r'), help='the location of REO matrix')
 parser.add_argument('-E_symbol', type=argparse.FileType('r'), help='the location of E gene symbol matrix')
-parser.add_argument('-A', type=argparse.FileType('r'), help='the location of couple A matrix')
-parser.add_argument('-A_symbol', type=argparse.FileType('r'), help='the location of A gene symbol matrix')
+parser.add_argument('-s', type=str, help='the species (human or mouse)')
+parser.add_argument('-ref', type=str, help='the reference genome (mm9, mm10, hg19 and hg38)')
 
 args = parser.parse_args()
 
@@ -52,9 +54,12 @@ E     = np.loadtxt(args.E)
 E_symbol = []
 E_symbol = [line.strip() for line in args.E_symbol]
 
-A     = np.load("RE_TG/mm9_A.npy")
-A_symbol = np.load("RE_TG/mm9_A_symbol.npy")
+print "RE_TG/"+args.s+"/"+args.ref +"/A.npy"
+print "RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy"
+A        = np.load("RE_TG/"+args.s+"/"+args.ref +"/A.npy")
+A_symbol = np.load("RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy")
 
+A = A.toarray()
 E_symbol = np.asarray(E_symbol)
 A_symbol = np.asarray(A_symbol)
 
@@ -68,7 +73,8 @@ print "Initializing non-negative matrix factorization for E..."
 E[E>10000] = 10000
 X = np.log(1+E)
 
-err1=np.zeros(rep)
+
+1=np.zeros(rep)
 for i in range(0,rep):
         model = NMF(n_components=K, init='random', random_state=i,solver='cd',max_iter=20)
         W20 = model.fit_transform(X)
@@ -137,6 +143,10 @@ print "Initializing non-negative matrix factorization for REO..."
 REO = np.log(1+REO)
 SW10 = np.dot(REO,LA.pinv(H10))
 SW10[SW10<0] = 0
+
+print S10
+print S20
+time.sleep(5)
 
 print "Initializing hyperparameters lambda1, lambda2 and mu..."
 set1=[1,10,100,1000,10000]
@@ -226,8 +236,7 @@ for x in range(len(set1)):
                         H2 = H2[perm[match],:]
                         terms[it]  = np.max(score)
                         err = abs(terms[it]-terms[it-1])/abs(terms[it-1])
-
-
+                        
                 for i in range(5):
                         H1 = H1*np.dot(np.transpose(W1),PeakO)/(np.dot(np.dot(np.transpose(W1),W1),H1)+eps)
 
@@ -269,5 +278,18 @@ index = detr.argmax()
 S1_final = S1_all[index,:]
 S2_final = S2_all[index,:]
 
+
+fout1 = open("scATAC-result.txt","w")
+fout2 = open("scRNA-result.txt","w")
+
 print S1_final
 print S2_final
+
+for item in S1_final:
+        fout1.write(str(item)+"\t")
+fout1.write("\n")
+
+
+for item in S2_final:
+        fout2.write(str(item)+"\t")
+fout2.write("\n")
