@@ -10,6 +10,7 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 
 ## Running coupleNMF
 coupleNMF receives 7 parameters:
+
 -k         the clustering numbers
 
 -PeakO     the location of PeakO matrix
