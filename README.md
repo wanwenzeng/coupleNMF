@@ -29,7 +29,7 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 ### Example
 
 ```
-python coupleNMF.py -k 3 -E RAd4/E.txt -PeakO RAd4/PeakO.txt -REO RAd4/REO.txt -E_symbol RAd4/symbol.txt -s mouse -ref mm9
+python coupleNMF.py -k 3 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -REO exampledata/REO.txt -E_symbol exampledata/symbol.txt -s mouse -ref mm9
 
 ```
 
