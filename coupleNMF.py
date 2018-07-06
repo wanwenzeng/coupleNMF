@@ -59,7 +59,8 @@ A        = np.load("RE_TG/"+args.s+"/"+args.ref +"/A.npy")
 A_symbol = np.load("RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy")
 
 print A
-A = A.toarray()
+A = todense(A)
+print A
 E_symbol = np.asarray(E_symbol)
 A_symbol = np.asarray(A_symbol)
 
