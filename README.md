@@ -11,12 +11,19 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 ## Running coupleNMF
 coupleNMF receives 7 parameters:
 -k         the clustering numbers
+
 -PeakO     the location of PeakO matrix
+
 -REO       the location of REO matrix
+
 -E         the location of E matrix
+
 -E_symbol  the location of gene symbol file
+
 -s         species (human or mouse)
+
 -ref       the reference genome (mm9, mm10, hg19, hg38)  
+
 
 ### Example
 
