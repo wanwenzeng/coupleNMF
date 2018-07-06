@@ -55,11 +55,10 @@ E     = np.loadtxt(args.E)
 E_symbol = []	
 E_symbol = [line.strip() for line in args.E_symbol]
 
-print "RE_TG/"+args.s+"/"+args.ref +"/A.npy"
-print "RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy"
 A        = np.load("RE_TG/"+args.s+"/"+args.ref +"/A.npy")
 A_symbol = np.load("RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy")
 
+print A
 A = A.toarray()
 E_symbol = np.asarray(E_symbol)
 A_symbol = np.asarray(A_symbol)
