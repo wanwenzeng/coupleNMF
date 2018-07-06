@@ -9,21 +9,21 @@ For preprocessing the scRNA-seq data, please following the standard processing p
 For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, REO and PeakO. 
 
 ## Running coupleNMF
-coupleNMF receives 7 parameters:
+* coupleNMF receives 7 parameters:
 
--k         the clustering numbers
+* -k         the clustering numbers
 
--PeakO     the location of PeakO matrix
+* -PeakO     the location of PeakO matrix
 
--REO       the location of REO matrix
+* -REO       the location of REO matrix
 
--E         the location of E matrix
+* -E         the location of E matrix
 
--E_symbol  the location of gene symbol file
+* -E_symbol  the location of gene symbol file
 
--s         species (human or mouse)
+* -s         species (human or mouse)
 
--ref       the reference genome (mm9, mm10, hg19, hg38)  
+* -ref       the reference genome (mm9, mm10, hg19, hg38)  
 
 
 ### Example
