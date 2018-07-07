@@ -8,7 +8,7 @@ import scipy.io as scio
 import pandas as pd
 import time
 import scipy.stats as stats
-from scipy.sparse import csr_matrix
+from scipy  import sparse
 
 def quantileNormalize(df_input):
     df = df_input.copy()
@@ -55,10 +55,9 @@ E     = np.loadtxt(args.E)
 E_symbol = []	
 E_symbol = [line.strip() for line in args.E_symbol]
 
-A        = np.load("RE_TG/"+args.s+"/"+args.ref +"/A.npy")
+A        = sparse.load_npz("RE_TG/"+args.s+"/"+args.ref +"/A.npz")
 A_symbol = np.load("RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy")
-
-print A.shape
+A        = A.toarray()
 
 E_symbol = np.asarray(E_symbol)
 A_symbol = np.asarray(A_symbol)
@@ -117,6 +116,7 @@ for item in E_subsymbol:
         A_subindex.append(A_symbol.tolist().index(item))
 
 A = A[A_subindex]
+temp = np.sum(np.abs(A),axis = 0)>0
 REO = REO.ix[np.sum(np.abs(A),axis = 0)>0,:]
 A = A[:,np.sum(np.abs(A),axis = 0)>0]
 
@@ -143,9 +143,6 @@ REO = np.log(1+REO)
 SW10 = np.dot(REO,LA.pinv(H10))
 SW10[SW10<0] = 0
 
-print S10
-print S20
-time.sleep(5)
 
 print "Initializing hyperparameters lambda1, lambda2 and mu..."
 set1=[1,10,100,1000,10000]
