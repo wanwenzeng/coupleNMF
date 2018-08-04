@@ -27,8 +27,8 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 
 * -lamdba2   the hyper-paramters lambda2 to control coupled term
 
-**Note:-k, -PeakO, -REO, -E, -E_symbol, -ref are the must-have parameters; **
-**-lambda1, -lamdba2 are optional parameters. If coupleNMF does not receive -lambda1 and -lambda2, it will choose the best parameters automatically.**
+Note:-k, -PeakO, -REO, -E, -E_symbol, -ref are the must-have parameters; 
+-lambda1, -lamdba2 are optional parameters. If coupleNMF does not receive -lambda1 and -lambda2, it will choose the best parameters automatically.
 
 
 
