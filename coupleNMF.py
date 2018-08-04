@@ -39,14 +39,22 @@ parser.add_argument('-E', type=argparse.FileType('r'), help='the location of sin
 parser.add_argument('-PeakO',type=argparse.FileType('r'), help='the location of singlecell ATAC-seq PeakO matrix')
 parser.add_argument('-REO', type=argparse.FileType('r'), help='the location of REO matrix')
 parser.add_argument('-E_symbol', type=argparse.FileType('r'), help='the location of E gene symbol matrix')
-parser.add_argument('-s', type=str, help='the species (human or mouse)')
 parser.add_argument('-ref', type=str, help='the reference genome (mm9, mm10, hg19 and hg38)')
+parser.add_argument('-lambda1', dest='lambda1', type=float, help='lambda1, hyperparameters to control the term NMF for E')
+parser.add_argument('-lambda2', dest='lambda2', type=float, help='lambda2, hyperparameters to control the coupled term')
 
 args = parser.parse_args()
 
 rep=50
 
 print "Loading data..."
+
+temp = args.ref
+if temp[0] == "m":
+	s = "mouse"
+else:
+	s = "human"
+
 K=args.k
 PeakO = np.loadtxt(args.PeakO)
 REO   = np.loadtxt(args.REO)
@@ -55,8 +63,8 @@ E     = np.loadtxt(args.E)
 E_symbol = []	
 E_symbol = [line.strip() for line in args.E_symbol]
 
-A        = sparse.load_npz("RE_TG/"+args.s+"/"+args.ref +"/A.npz")
-A_symbol = np.load("RE_TG/"+args.s+"/"+args.ref +"/A_symbol.npy")
+A        = sparse.load_npz("RE_TG/"+s+"/"+args.ref +"/A.npz")
+A_symbol = np.load("RE_TG/"+s+"/"+args.ref +"/A_symbol.npy")
 A        = A.toarray()
 
 E_symbol = np.asarray(E_symbol)
@@ -145,10 +153,20 @@ SW10[SW10<0] = 0
 
 
 print "Initializing hyperparameters lambda1, lambda2 and mu..."
-set1=[1,10,100,1000,10000]
-set2=[0.0001,0.001,0.01,0.1]
-#set1 = [1000]
-#set2 = [1]
+if type(args.lambda1) == type(None) and type(args.lambda2) == type(None):
+	set1=[1,10,100,1000,10000]
+	set2=[0.0001,0.001,0.01,0.1]
+elif type(args.lambda1) == type(None):
+	set1=[1,10,100,1000,10000]
+	set2=[args.lambda2]
+elif type(args.lambda2) == type(None):
+        set1=[args.lambda1]
+        set2=[0.0001,0.001,0.01,0.1]
+
+else:
+	set1=[args.lambda1]
+	set2=[args.lambda2]
+
 mu      = 1
 eps = 0.001
 detr = np.zeros((len(set1),len(set2)))
@@ -290,4 +308,3 @@ fout1.write("\n")
 for item in S2_final:
         fout2.write(str(item)+"\t")
 fout2.write("\n")
-
