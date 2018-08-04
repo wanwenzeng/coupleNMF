@@ -9,7 +9,7 @@ For preprocessing the scRNA-seq data, please following the standard processing p
 For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, REO and PeakO. 
 
 ## Running coupleNMF
-**coupleNMF receives 7 parameters:**
+**coupleNMF receives 8 parameters:**
 
 * -k         the clustering numbers
 
@@ -21,15 +21,21 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 
 * -E_symbol  the location of gene symbol file
 
-* -s         species (human or mouse)
-
 * -ref       the reference genome (mm9, mm10, hg19, hg38)  
+
+* -lambda1   the hyper-paramters lambda1 to control term of the NMF for E 
+
+* -lamdba2   the hyper-paramters lambda2 to control coupled term
+
+**Note:-k, -PeakO, -REO, -E, -E_symbol, -ref are the must-have parameters; **
+**-lambda1, -lamdba2 are optional parameters. If coupleNMF does not receive -lambda1 and -lambda2, it will choose the best parameters automatically.**
+
 
 
 ### Example
 
 ```
-python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -REO exampledata/REO.txt -E_symbol exampledata/symbol.txt -s mouse -ref mm9
+python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -REO exampledata/REO.txt -E_symbol exampledata/symbol.txt -ref mm9 -lambda1 10000 -lambda2 0.001
 
 ```
 
