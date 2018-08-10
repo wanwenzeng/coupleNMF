@@ -15,19 +15,19 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 
 * -PeakO     the location of PeakO matrix
 
-* -REO       the location of REO matrix
-
 * -E         the location of E matrix
 
 * -E_symbol  the location of gene symbol file
 
-* -ref       the reference genome (mm9, mm10, hg19, hg38)  
+* -P_symbol  the location of peak symbol file
+
+* -pe        the location of pre-calculated peak-gene interactions file 
 
 * -lambda1   the hyper-paramters lambda1 to control term of the NMF for E 
 
 * -lamdba2   the hyper-paramters lambda2 to control coupled term
 
-Note:-k, -PeakO, -REO, -E, -E_symbol, -ref are the must-have parameters; 
+Note:-k, -PeakO, -E, -E_symbol, -P_symbol, -pe are the must-have parameters; 
 -lambda1, -lamdba2 are optional parameters. If coupleNMF does not receive -lambda1 and -lambda2, it will choose the best parameters automatically.
 
 
@@ -35,7 +35,7 @@ Note:-k, -PeakO, -REO, -E, -E_symbol, -ref are the must-have parameters;
 ### Example
 
 ```
-python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -REO exampledata/REO.txt -E_symbol exampledata/symbol.txt -ref mm9 -lambda1 10000 -lambda2 0.001
+python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_symbol exampledata/symbol.txt -P_symbol exampledata/PeakName.txt -pe exampledata/peak_gene_100k_corr.bed -lambda1 10000 -lambda2 0.001
 
 ```
 
