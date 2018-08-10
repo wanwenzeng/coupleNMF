@@ -260,7 +260,9 @@ for x in range(len(set1)):
 		count = count + 1
 			
 [i,j] = npmax(detr)
-print detr1[i,j]
+print "Score is ": detr1[i,j]/K
+print "If the score >=1, the clustering matching for scRNA-seq and scATAC-seq is well. Otherwise, we sugguest to tune the parameters."
+
 index = detr.argmax()
 S1_final = S1_all[index,:]+1
 S2_final = S2_all[index,:]+1
