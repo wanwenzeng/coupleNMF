@@ -6,7 +6,13 @@ Here is the source code for Integrative analysis of single cell genomics data by
 ## Preprocessing
 For preprocessing the scRNA-seq data, please following the standard processing pipline to get the expression matrix, where each row represents a gene, each column represents a cell.
 
-For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, PeakO. 
+For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, PeakO and PeakName. 
+
+For pre-calculated file, please download the data first.
+```
+wget http://web.stanford.edu/~zduren/CoupledNMF/Thresholding-Based%20SVD_files/common_data.tar.gz
+tar -zxvf common_data.tar.gz
+```
 
 ## Running coupleNMF
 **coupleNMF receives 8 parameters:**
@@ -35,7 +41,7 @@ Note:-k, -PeakO, -E, -E_symbol, -P_symbol, -pe are the must-have parameters;
 ### Example
 
 ```
-python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_symbol exampledata/symbol.txt -P_symbol exampledata/PeakName.txt -pe exampledata/peak_gene_100k_corr.bed -lambda1 10000 -lambda2 0.001
+python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_symbol exampledata/symbol.txt -P_symbol exampledata/PeakName.txt -pe exampledata/peak_gene_100k_corr.bed -lambda1 25 -lambda2 0.04
 
 ```
 
