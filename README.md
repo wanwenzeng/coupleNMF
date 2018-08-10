@@ -6,7 +6,7 @@ Here is the source code for Integrative analysis of single cell genomics data by
 ## Preprocessing
 For preprocessing the scRNA-seq data, please following the standard processing pipline to get the expression matrix, where each row represents a gene, each column represents a cell.
 
-For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, REO and PeakO. 
+For preprocessing the scATAC-seq data, please first put all the .bam files for each cell into a folder. Then run the preprossing script we provided to get the the openness matrix, PeakO. 
 
 ## Running coupleNMF
 **coupleNMF receives 8 parameters:**
