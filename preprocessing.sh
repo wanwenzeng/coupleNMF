@@ -1,4 +1,4 @@
-#We now support mm9 or hg19 only, change the genome to your interested genome
+#We now support mm9, mm10, hg19 and hg38 only, change the genome to your interested genome
 genome=mm9  
 
 #Download the pre-calculated files
