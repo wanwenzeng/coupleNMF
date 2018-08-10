@@ -1,5 +1,8 @@
 #We now support mm9 or hg19 only, change the genome to your interested genome
 genome=mm9  
+
+wget http://web.stanford.edu/~zduren/CoupledNMF/Thresholding-Based%20SVD_files/common_data.tar.gz
+tar -zxvf common_data.tar.gz
 #Please put all the single cell RNA-seq bed files into ./Bed/ folder
 #Get PeakO.txt file
 cat ./Bed/* |sort -k1,1 -k2,2n> merge.bed
