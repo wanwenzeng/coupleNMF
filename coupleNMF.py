@@ -262,8 +262,8 @@ for x in range(len(set1)):
 [i,j] = npmax(detr)
 print detr1[i,j]
 index = detr.argmax()
-S1_final = S1_all[index,:]
-S2_final = S2_all[index,:]
+S1_final = S1_all[index,:]+1
+S2_final = S2_all[index,:]+1
 E_final  = E_all[index,:,:]
 P_final  = P_all[index,:,:]
 E_p_final  = E_p_all[index,:,:]
@@ -289,5 +289,5 @@ for i in range(K):
 	temp = np.dot(np.reshape(E_final[i,:],(E.shape[0],1)),np.reshape(P_final[i,:],(1,PeakO.shape[0])))*A
 	p, q = np.nonzero(temp)
 	for j in range(len(p)):
-		fout3.write("cluster "+str(i)+": "+E_symbol[p[j]]+"\t"+P_symbol[q[j]]+"\t"+str(E_p_final[i,p[j]])+"\t"+str(P_p_final[i,q[j]])+"\n")
+		fout3.write("cluster "+str(i+1)+": "+E_symbol[p[j]]+"\t"+P_symbol[q[j]]+"\t"+str(E_p_final[i,p[j]])+"\t"+str(P_p_final[i,q[j]])+"\n")
 
