@@ -1,13 +1,14 @@
 #We now support mm9 or hg19 only, change the genome to your interested genome
 genome=mm9  
 
+#Download the pre-calculated files
 wget http://web.stanford.edu/~zduren/CoupledNMF/Thresholding-Based%20SVD_files/common_data.tar.gz
 tar -zxvf common_data.tar.gz
+
 #Please put all the single cell RNA-seq bed files into ./Bed/ folder
-#Get PeakO.txt file
+#Get PeakO.txt and PeakName.txt file
 cat ./Bed/* |sort -k1,1 -k2,2n> merge.bed
 ls ./Bed/ > ATAC_SampleName
-
 module load gcc
 ml load python
 macs2 callpeak -t merge.bed -f BED -n Peak --nomodel --extsize 147
@@ -20,6 +21,7 @@ bedtools intersect -a region.bed -b ./Bed/${line} -wa -c -sorted|cut -f 4 >a
 paste -d '\t' region_read.bed a>a1
 cat a1 > PeakO.txt
 done
+cat region_read.bed |cut -f 1 >PeakName.txt
 
 #Get peak_gene_100k_corr.bed file
 bedtools intersect -a common_data/Promoter_100k_${genome}.bed  -b Peak.bed -wa -wb -sorted|awk 'BEGIN{OFS="\t"}{print $5,$6,$7,$4,$3-100000-$6}'|sed 's/-//g'|sort -k1,1 -k2,2n >peak_gene_100k.bed
