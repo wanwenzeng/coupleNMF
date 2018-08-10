@@ -31,6 +31,14 @@ For preprocessing the scATAC-seq data, please first put all the .bam files for e
 Note:-k, -PeakO, -E, -E_symbol, -P_symbol, -pe are the must-have parameters; 
 -lambda1, -lamdba2 are optional parameters. If coupleNMF does not receive -lambda1 and -lambda2, it will choose the best parameters automatically.
 
+**coupleNMF outputs 3 files:**
+
+* scATAC-result.txt                       the clustering results for scATAC-seq
+
+* scRNA-result.txt                        the clustering results for scRNA-seq
+
+* cluster-specific-peaks-genes-pairs.txt  the cluster-specific peak-gene pairs. First column is the gene name, second column is the peak name, the third column is the p-value for gene and last column is the p-value for peak. 
+
 
 
 ### Example
