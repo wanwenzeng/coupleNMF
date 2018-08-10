@@ -41,7 +41,7 @@ Note:-k, -PeakO, -E, -E_symbol, -P_symbol, -pe are the must-have parameters;
 ### Example
 
 ```
-python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_symbol exampledata/symbol.txt -P_symbol exampledata/PeakName.txt -pe common_data/RE_gene_corr_mm9.bed  -lambda1 25 -lambda2 0.04
+python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_symbol exampledata/symbol.txt -P_symbol exampledata/PeakName.txt -pe common_data/peak_gene_100k_corr.bed  -lambda1 25 -lambda2 0.04
 
 ```
 
