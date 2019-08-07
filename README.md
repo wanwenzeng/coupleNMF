@@ -57,7 +57,7 @@ python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_sy
 * argparse 
 * itertools
 * MACS
-
+* umap (https://github.com/lmcinnes/umap)
 
 
 
