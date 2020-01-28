@@ -49,6 +49,35 @@ python coupleNMF.py -k 2 -E exampledata/E.txt -PeakO exampledata/PeakO.txt -E_sy
 ```
 
 
+## Connection of Cell Ranger
+
+Since the Cell Ranger （https://github.com/10XGenomics/cellranger) is one of the most popular single cell preprocessing software, our algorithm can further process the output of Cell Ranger. For example, one of the Cell Ranger output is the matrix.mtx as
+
+```
+%%MatrixMarket matrix coordinate integer general
+%metadata_json: {"format_version": 2, "software_version": "1.2.0"}
+579 668 382948
+1 1 6622
+2 1 14970
+3 1 58
+4 1 339
+5 1 749
+6 1 1014
+…………
+…………
+```
+
+Then we can use the following easy script to transfer the output matrix.mtx file to the input format file our algorithm
+
+```
+from scipy.io import mmread
+import numpy as np
+
+mat = mmread("matrix.mtx")
+np.savetxt('matrix.txt', mat.todense(),  delimiter='\t', fmt="%d")
+```
+
+
 ## Requirements
 * sklearn
 * pandas
